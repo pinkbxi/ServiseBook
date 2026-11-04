@@ -1,38 +1,79 @@
 <!DOCTYPE html>
 <html lang="lt">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <h1 class="ce">
-            Servise book
-        </h1>
-    </head>
-    <body>
-        <label class="ce">Buvusi automobilio rida</label>
-        <input id="ridab" class="ce">
-        <br>
-        <label class="ce">Dabartinė automobilio rida</label>
-        <input id="ridad" class="ce">
-        <br>
-        <button type="button" onclick="fun()" id="ap" class="ce">
-            Apskaičiuoti
-        </button>
-        <br>
-        <label class="ce" id="ats"></label>
-    </body>
-    <script>
-        function fun(){
-            var rida_dabar = Number(document.getElementById("ridad").value);
-            var rida_buvusi = Number(document.getElementById("ridab").value);
-            var kiek_liko = document.getElementById("ats");
-            kiek_liko.textContent = rida_dabar - rida_buvusi;
-        }
-    </script>
-    <style>
-        .ce{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: auto;
-        }
-    </style>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servise book</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin: 0;
+      padding: 10px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    input, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: inherit;
+    }
+
+    #ats {
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Servise book</h1>
+
+    <label for="ridab">Buvusi automobilio rida</label>
+    <input id="ridab" type="number">
+
+    <label for="ridad">Dabartinė automobilio rida</label>
+    <input id="ridad" type="number">
+
+    <button type="button" onclick="fun()">Apskaičiuoti</button>
+
+    <div id="ats"></div>
+  </div>
+
+  <script>
+    const ridab = document.getElementById("ridab");
+    const ridad = document.getElementById("ridad");
+
+    // Show saved values from cookies
+    function getCookie(name) {
+      return document.cookie.split('; ')
+        .find(c => c.startsWith(name + '='))?.split('=')[1] || '';
+    }
+    ridab.value = getCookie('ridab');
+
+    function fun() {
+      const buvusi = Number(ridab.value);
+      const dabar = Number(ridad.value);
+
+      // Save to cookies
+      document.cookie = 'ridab=' + buvusi + '; max-age=31536000; path=/';
+
+      document.getElementById("ats").textContent = dabar - buvusi;
+    }
+  </script>
+</body>
 </html>
