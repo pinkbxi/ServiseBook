@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="lt">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <h1 class="ce">
+            Servise book
+        </h1>
+    </head>
+    <body>
+        <label class="ce">Buvusi automobilio rida</label>
+        <input id="ridab" class="ce">
+        <br>
+        <label class="ce">Dabartinė automobilio rida</label>
+        <input id="ridad" class="ce">
+        <br>
+        <button type="button" onclick="fun()" id="ap" class="ce">
+            Apskaičiuoti
+        </button>
+        <br>
+        <label class="ce" id="ats"></label>
+    </body>
+    <script>
+        function fun(){
+            var rida_dabar = Number(document.getElementById("ridad").value);
+            var rida_buvusi = Number(document.getElementById("ridab").value);
+            var kiek_liko = document.getElementById("ats");
+            kiek_liko.textContent = rida_dabar - rida_buvusi;
+        }
+    </script>
+    <style>
+        .ce{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+    </style>
+</html>
